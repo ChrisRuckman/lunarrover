@@ -1,0 +1,625 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US"> 
+<head profile="http://gmpg.org/xfn/11">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+	<meta http-equiv="author" content="andrew harrison" /> 
+	<meta name="copyright" content="(CC) MMXII andrew harrison" /> 
+	<title>NASA Lunar Rover Geometry Badge</title>
+	<meta name="description" content="NASA Lunar Rover Geometry Badge Activity" /> 
+	<meta name="keywords" content="NASA, lunar rover, rover, geometry, badge, badging, moon, space, science, math, fun, NASA activity, NASA science" /> 
+	<link rel="stylesheet" type="text/css" id="space-css" href="style/css/space.css" media="all"/>
+	<script type="text/javascript" src="style/js/jq/jquery-1.8.2.min.js" charset="utf-8"></script> 
+	<script type="text/javascript" src="style/js/gs/TweenLite.min.js" charset="utf-8"></script>	
+	<script type="text/javascript" src="style/js/gs/plugins/CSSPlugin.min.js" charset="utf-8"></script>	
+	<link rel="stylesheet" type="text/css" href="style/js/shadowbox-3.0.3/shadowbox.css">
+	<script type="text/javascript" src="style/js/shadowbox-3.0.3/shadowbox.js"></script>
+<body> 
+	<div id="main" class="noTop">
+		<div id="header">&nbsp;</div>
+		<p>Please perform the <a href="http://www.nasa.gov/pdf/514487main_AL_ST_Lunar%20Rover_FINAL.pdf" target="_blank">NASA Lunar Rover activity</a> first.  You'll learn the simulator concepts and a lot about Lunar exploration.</p>
+		<p>For the best experience, view this page in <a href="www.google.com/chrome" target="_blank">Google Chrome</a> or <a href="www.apple.com/safari/" target="_blank">Apple Safari</a>.</p>
+		<p>Please enter your name: <input type="text" id="name" style="font-size: 10pt; width: 200px;" /></p>
+		<br/>
+		<img src="style/img/scenario.png" title="Activity Scenario" alt="Activity Scenario" /><br/>
+		<p>You are on the mission planning team that will determine the best route for the first trip using the new pressurized Lunar Rover Vehicle (Rover 1).  The LRV is at Station A, and your job is to find the fastest route to complete the three tasks below and return to Station A. You have to find the shortest route or else you will run out of oxygen, which will terminate your career as an astronaut.</p>
+		<p>Here are the tasks to be completed – they can be done in any order, you just have to make sure the rover goes to stations D, E and F and returns to A.
+			<ol type="a">
+				<li>Check instrument settings at Station F</li>	
+				<li>Pick up 200 kg of equipment at Station E</li>
+				<li>Replace a dead battery at Station D</li>
+			</ol>
+		</p>
+		<p>The average speed of the rover without equipment can be determined in test runs. Pay attention! You won’t be allowed to repeat them. Note the distance traveled and the time interval for the loaded and empty rover. You’ll need this to calculate time for all possible travel routes.</p>
+		<p>Use the diagram below to plan the route and to calculate distances in kilometers to two decimal places. Calculate travel times of routes in hours to two decimal places.</p>
+		<p class="emphasis">Just watch your oxygen!!!</p>
+		<p>You may use a calculator or a <a href="RoverStudentAssistSheet.xls" target="_blank">spreadsheet</a> to assist you with your calculations.</p>
+		<p class="center"><img src="style/img/pathDiagram.png" alt="rover path diagram" title="rover path diagram" /><br/>* not all possible routes are shown</p>
+		<p>When you enter lengths to one decimal place in the table below, you will see your numbers appear on the image (whether or not they are correct).</p>
+	</div>
+	<!--a href="javascript:;" onclick="openForm();">open form</a-->
+	<br class="clear"/><br/>
+	<div id="trials">
+		<img src="style/img/ratetest.png" title="Rate Test" alt="Rate Test" /><br/>
+		<div id="demo">
+			<div id="rover1"></div>
+			<div id="rover2"></div>
+		</div>
+		<input type="button" value=" Run Test " class="btn floatRight" id="btnRunTest" onclick="runTest()" /><br class="clear"/> 
+		<div id="results">
+			<h3>Results</h3>
+			<div class="resultsBox">Distance traveled:</div><div class="resultsBox">100 km</div><br class="clear"/>
+			<div class="resultsBox">Average Time Empty:</div><div class="resultsBox">4 hours</div><br class="clear"/>
+			<div class="resultsBox">Average Time Loaded:</div><div class="resultsBox">5 hours</div><br class="clear"/><br/>
+			<form id="rates">
+				<h3>Calcuate the average rates of the empty and loaded rovers in km/h</h3>
+				<div class="resultsBox">Travel Rate Empty:</div><div class="resultsBox"><input type="text" pattern="[0-9.]+" class="rates" id="txtRateEm" />&nbsp;km/h</div><br class="clear"/>
+				<div class="resultsBox">Travel Rate Loaded:</div><div class="resultsBox"><input type="text" pattern="[0-9.]+" class="rates" id="txtRateLd" />&nbsp;km/h</div><br class="clear"/>
+				<div id="ratesResults">&nbsp;</div>
+				<input type="button" value=" Check Rates " class="btn floatRight" onclick="checkRates()" /><br class="clear"/> 
+			</form>
+		</div>
+	</div>
+	<br class="clear"/><br/>
+	<div id="dataTable">
+		<img src="style/img/calc.png" title="Calculations" alt="Calculations" /><br/>
+		<p>Enter lengths to two decimal places in the table below.  You can tab between boxes.</p>
+		<form id="calcs" style="display: none;">
+			<div class="titles">
+				<div class="col"><br/>Segment</div>
+				<div class="col">Travel Distance = Segment Length (km)</div>
+				<div class="col"><br/>Travel Time, Empty (h)</div>
+				<div class="col"><br/>Travel Time, Loaded (h)</div>
+				&nbsp;
+			</div>
+			<div class="row">
+				<div class="col">AB</div>
+				<div class="col"><em>2.00</em></div>
+				<div class="col" id="AB2"><input type="text" pattern="[0-9.]+" id="txtAB2" /></div>
+				<div class="col" id="AB3"><input type="text" pattern="[0-9.]+" id="txtAB3" /></div>
+				&nbsp;
+			</div>
+			<div class="row">
+				<div class="col">AC</div>
+				<div class="col" id="AC1"><input type="text" pattern="[0-9.]+" id="txtAC1" /></div>
+				<div class="col" id="AC2"><input type="text" pattern="[0-9.]+" id="txtAC2" /></div>
+				<div class="col" id="AC3"><input type="text" pattern="[0-9.]+" id="txtAC3" /></div>
+				&nbsp;
+			</div>
+			<div class="row">
+				<div class="col">AD</div>
+				<div class="col" id="AD1"><input type="text" pattern="[0-9.]+" id="txtAD1" /></div>
+				<div class="col" id="AD2"><input type="text" pattern="[0-9.]+" id="txtAD2" /></div>
+				<div class="col" id="AD3"><input type="text" pattern="[0-9.]+" id="txtAD3" /></div>
+				&nbsp;
+			</div>
+			<div class="row">
+				<div class="col">AE</div>
+				<div class="col" id="AE1"><input type="text" pattern="[0-9.]+" id="txtAE1" /></div>
+				<div class="col" id="AE2"><input type="text" pattern="[0-9.]+" id="txtAE2" /></div>
+				<div class="col" id="AE3"><input type="text" pattern="[0-9.]+" id="txtAE3" /></div>
+				&nbsp;
+			</div>
+			<div class="row">
+				<div class="col">AF</div>
+				<div class="col" id="AF1"><input type="text" pattern="[0-9.]+" id="txtAF1" /></div>
+				<div class="col" id="AF2"><input type="text" pattern="[0-9.]+" id="txtAF2" /></div>
+				<div class="col" id="AF3"><input type="text" pattern="[0-9.]+" id="txtAF3" /></div>
+				&nbsp;
+			</div>
+			<div class="row">
+				<div class="col">BC</div>
+				<div class="col" id="BC1"><input type="text" pattern="[0-9.]+" id="txtBC1" /></div>
+				<div class="col" id="BC2"><input type="text" pattern="[0-9.]+" id="txtBC2" /></div>
+				<div class="col" id="BC3"><input type="text" pattern="[0-9.]+" id="txtBC3" /></div>
+				&nbsp;
+			</div>
+			<div class="row">
+				<div class="col">BF</div>
+				<div class="col" id="BF1"><em>10.00</em></div>
+				<div class="col" id="BF2"><input type="text" pattern="[0-9.]+" id="txtBF2" /></div>
+				<div class="col" id="BF3"><input type="text" pattern="[0-9.]+" id="txtBF3" /></div>
+				&nbsp;
+			</div>
+			<div class="row">
+				<div class="col">CD</div>
+				<div class="col" id="CD1"><em>2.00</em></div>
+				<div class="col" id="CD2"><input type="text" pattern="[0-9.]+" id="txtCD2" /></div>
+				<div class="col" id="CD3"><input type="text" pattern="[0-9.]+" id="txtCD3" /></div>
+				&nbsp;
+			</div>
+			<div class="row">
+				<div class="col">CE</div>
+				<div class="col" id="CE1"><em>1.70</em></div>
+				<div class="col" id="CE2"><input type="text" pattern="[0-9.]+" id="txtCE2" /></div>
+				<div class="col" id="CE3"><input type="text" pattern="[0-9.]+" id="txtCE3" /></div>
+				&nbsp;
+			</div>
+			<div class="row">
+				<div class="col">CF</div>
+				<div class="col" id="CF1"><input type="text" pattern="[0-9.]+" id="txtCF1" /></div>
+				<div class="col" id="CF2"><input type="text" pattern="[0-9.]+" id="txtCF2" /></div>
+				<div class="col" id="CF3"><input type="text" pattern="[0-9.]+" id="txtCF3" /></div>
+				&nbsp;
+			</div>
+			<div class="row">
+				<div class="col">DE</div>
+				<div class="col" id="DE1"><input type="text" pattern="[0-9.]+" id="txtDE1" /></div>
+				<div class="col" id="DE2"><input type="text" pattern="[0-9.]+" id="txtDE2" /></div>
+				<div class="col" id="DE3"><input type="text" pattern="[0-9.]+" id="txtDE3" /></div>
+				&nbsp;
+			</div>
+			<div class="row">
+				<div class="col">DF</div>
+				<div class="col" id="DF1"><input type="text" pattern="[0-9.]+" id="txtDF1" /></div>
+				<div class="col" id="DF2"><input type="text" pattern="[0-9.]+" id="txtDF2" /></div>
+				<div class="col" id="DF3"><input type="text" pattern="[0-9.]+" id="txtDF3" /></div>
+				&nbsp;
+			</div>
+			<div class="row">
+				<div class="col">EF</div>
+				<div class="col" id="EF1"><input type="text" pattern="[0-9.]+" id="txtEF1" /></div>
+				<div class="col" id="EF2"><input type="text" pattern="[0-9.]+" id="txtEF2" /></div>
+				<div class="col" id="EF3"><input type="text" pattern="[0-9.]+" id="txtEF3" /></div>
+				&nbsp;
+			</div>
+			<br class="clear"/>
+			<input type="button" value=" Check Answers " class="btn floatRight" onclick="checkAnswers()" /><br class="clear"/> 
+			<div id="message">&nbsp;</div>
+		</form>
+	</div>
+	<br class="clear"/><br/>
+	<div id="map">
+		<img src="style/img/rovertest.png" title="Rover Test" alt="Rover Test" /><br/>
+		<div id="moonMap" style="display: none;">
+			<div id="theRover">&nbsp;</div>
+		</div>
+		<div id="roverTest" style="display: none;">
+			<div id="meter" style="display: none;">
+				<div id="bar"><div id="lbl">oxygen 100%</div></div>
+				&nbsp;
+			</div>
+			<div id="choices">
+				<h3>Select the Fastest Path</h3>
+				<input type="button" value=" AFDCEA " class="testBtn" onclick="mapTest('a')" />
+				<input type="button" value=" ADEFA " class="testBtn" onclick="mapTest('b')" />
+				<input type="button" value=" AFEDA " class="testBtn" onclick="mapTest('c')" />
+				<input type="button" value=" AFDEA " class="testBtn" onclick="mapTest('d')" />
+			</div>
+			<br class="clear"/> 
+			<div id="pathResults">&nbsp;</div>
+			<div id="low02" style="visibility: hidden; position: relative; top: -550px; text-align: center;">
+				<span style="background-color: red; padding: 10px 20px; font-size: 14pt; font-weight: bold;">
+					Low Oxygen Warning!!!
+				</span>
+			</div>
+		</div>
+	</div>
+
+	<br class="clear"/><br/>
+	<div id="footer" class="noBottom"><p class="center">&copy; 1999-2013 by Wheeling Jesuit University/Center for Educational Technologies®. 316 Washington Ave., Wheeling, WV 26003-6243. All rights reserved. <a href="http://www.cet.edu/?cat=about_us&page=37">Privacy Policy</a> and <a href="http://www.cet.edu/?cat=about_us&page=36">Terms of Use</a>.</p></div>
+	<span id="sound1"></span><span id="sound2"></span>
+	<script type="text/javascript">
+		/* <![CDATA[ */
+			Shadowbox.init({skipSetup: true});
+			$("input:text").each(function(){
+				$(this).val('');
+			});
+			var soundLoop;
+
+			$("#rover1").mouseover(function(){
+				var sound = $('<embed autoplay="true" height="0" width="0" />');
+				sound.attr('src', 'style/sound/EngineRev.mp3');
+				$('body').append(sound);
+			});
+
+			$("#rover2").mouseover(function(){
+				var sound = $('<embed autoplay="true" height="0" width="0" />');
+				sound.attr('src', 'style/sound/EngineRev.mp3');
+				$('body').append(sound);
+			});
+
+			$("#btnRunTest").click(function(){
+				playSound1("Moving_v-public_d-304_hifi.mp3", "true");
+			});
+			
+			$(function() {
+				var rov = $("#theRover");
+				TweenLite.to(rov, 0, {css:{y:"470", x:"650"}});
+			});
+			
+			function moveCloseLink(){ 
+				var cb=document.getElementById('sb-nav-close'); 
+				var tb=document.getElementById('sb-title'); 
+				if(tb) tb.appendChild(cb); 
+			}
+
+			function openForm(){
+				var w = 0;
+				var h = 0;
+				var t = '';
+				var html = '';
+				var p = '';
+
+				w = 750;
+				h = 800;
+				t = 'We would like your feedback';
+				p = 'iframe';
+				html = '../badge-it-gadget-lite/process-badges/index.php?badge=lunarrovergeometry';
+				//html = '../badge-it-gadget-lite/feedback.php?badge=lunarrovergeometry';
+
+				Shadowbox.open({
+					content:		html,
+					player:			p,
+					title:			t,
+					height:			h,
+					width:			w
+				});
+				moveCloseLink();
+			}
+
+			function playSound1(file, loop) {
+				document.getElementById("sound1").innerHTML = "<embed src=\"style/sound/"+file+"\" hidden=\"true\" autostart=\"true\" playcount=\"50\" loop=\"50\" />";
+			}
+
+			function playSound2(file, loop) {
+				document.getElementById("sound2").innerHTML = "<embed src=\"style/sound/"+file+"\" hidden=\"true\" autostart=\"true\" loop=\""+loop+"\" />";
+			}
+
+			function runTest() {
+				//get objects
+				var rov1 = $("#rover1");
+				var rov2 = $("#rover2");
+				//destroy previous tweens
+				TweenLite.killTweensOf(rov1);
+				TweenLite.killTweensOf(rov2);
+				rov1.css("margin-left", "0px");
+				rov2.css("margin-left", "0px");
+				//create timers
+				var timer = setInterval(function(){
+					rov1.toggleClass('r2');
+				}, 100);
+				var timer2 = setInterval(function(){
+					rov2.toggleClass('r2');
+				}, 200);
+				//animation
+				TweenLite.to(rov1, 3, {css:{marginLeft:"675px"}, onComplete:function(){
+					clearInterval(timer);
+				}});
+				TweenLite.to(rov2, 5, {css:{marginLeft:"675px"}, onComplete:function(){
+					clearInterval(timer2);
+					$("#results").fadeIn();
+				}});
+			}
+
+			function checkRates() {
+				var rates = document.getElementById("rates");
+				var nulls = "";
+				var nans = "";
+				if(rates.elements["txtRateEm"].value == "" || rates.elements["txtRateEm"].value == " " || rates.elements["txtRateLd"].value == "" || rates.elements["txtRateLd"].value == " ") {
+					nulls = "Please complete the entire form! ";
+				}
+				if(!IsNumeric(rates.elements["txtRateEm"].value) || !IsNumeric(rates.elements["txtRateLd"].value)) {
+					nans = "All values must be numeric!";
+				}
+				var errs = nulls+nans;
+				if(errs != "") {
+					$("#ratesResults").html('<span class="incorrect"><h3>'+errs+'</h3></span>');
+					$("#ratesResults").fadeIn();
+				} else {
+					var data = "action=rate&txtRateEm="+rates.elements["txtRateEm"].value+"&txtRateLd="+rates.elements["txtRateLd"].value;
+					ajaxCall(
+						data,
+						function(result) {
+							$("#ratesResults").html(result);
+							$("#ratesResults").fadeIn();
+							if(document.getElementById('ratesResults').innerHTML.indexOf('Correct!') > 0) {
+								unlockCalc();
+							}
+						},
+						function(jq, status, err) {
+							$("#ratesResults").html('<span class="incorrect"><h3>Sorry, we were unable to connect to the server.</h3></span>');
+							$("#ratesResults").fadeIn();
+						}
+					);
+				}
+			}
+
+			function unlockCalc() {
+				document.forms.calcs.style.display = "block";
+			}
+
+			function checkAnswers() {
+				$(".col").removeClass("err");
+				var calcs = document.getElementById("calcs");
+				//error trapping
+				var nulls = "";
+				var numbs = "";
+				for(var i=0; i<calcs.length - 1;i++) {
+					if(calcs.elements[i].value == "" || calcs.elements[i].value == " ") {
+						nulls = "Please complete the entire form!  ";
+						var id = $("#"+calcs.elements[i].id).closest("div").attr("id");
+						$("#"+id).addClass("err");
+					}
+					if(!IsNumeric(calcs.elements[i].value)) {
+						numbs = "All values must be numeric!";
+						var id = $("#"+calcs.elements[i].id).closest("div").attr("id");
+						$("#"+id).addClass("err");
+					}
+				}
+				var errs = nulls+numbs;
+				if(errs!="") {
+					$("#message").html('<div class="incorrect"><h3>Error!</h3><p>'+errs+'</p>');
+					$("#message").fadeIn();
+					//uncomment next line to test unlocking the Rover Test portion without having to finish the Calc portion
+					unlockRoverTest();
+				} else {
+					//value validation
+					var data = "action=grade&txtAB2="+calcs.elements['txtAB2'].value+"&txtAB3="+calcs.elements['txtAB3'].value+"&txtAC1="+calcs.elements['txtAC1'].value+"&txtAC2="+calcs.elements['txtAC2'].value+"&txtAC3="+calcs.elements['txtAC3'].value+"&txtAD1="+calcs.elements['txtAD1'].value+"&txtAD2="+calcs.elements['txtAD2'].value+"&txtAD3="+calcs.elements['txtAD3'].value+"&txtAE1="+calcs.elements['txtAE1'].value+"&txtAE2="+calcs.elements['txtAE2'].value+"&txtAE3="+calcs.elements['txtAE3'].value+"&txtAF1="+calcs.elements['txtAF1'].value+"&txtAF2="+calcs.elements['txtAF2'].value+"&txtAF3="+calcs.elements['txtAF3'].value+"&txtBC1="+calcs.elements['txtBC1'].value+"&txtBC2="+calcs.elements['txtBC2'].value+"&txtBC3="+calcs.elements['txtBC3'].value+"&txtBF2="+calcs.elements['txtBF2'].value+"&txtBF3="+calcs.elements['txtBF3'].value+"&txtCD2="+calcs.elements['txtCD2'].value+"&txtCD3="+calcs.elements['txtCD3'].value+"&txtCE2="+calcs.elements['txtCE2'].value+"&txtCE3="+calcs.elements['txtCE3'].value+"&txtCF1="+calcs.elements['txtCF1'].value+"&txtCF2="+calcs.elements['txtCF2'].value+"&txtCF3="+calcs.elements['txtCF3'].value+"&txtDE1="+calcs.elements['txtDE1'].value+"&txtDE2="+calcs.elements['txtDE2'].value+"&txtDE3="+calcs.elements['txtDE3'].value+"&txtDF1="+calcs.elements['txtDF1'].value+"&txtDF2="+calcs.elements['txtDF2'].value+"&txtDF3="+calcs.elements['txtDF3'].value+"&txtEF1="+calcs.elements['txtEF1'].value+"&txtEF2="+calcs.elements['txtEF2'].value+"&txtEF3="+calcs.elements['txtEF3'].value;
+					ajaxCall(
+						data,
+						function(json){
+							var obj = jQuery.parseJSON(json);
+							$("#message").html(obj.msg);
+							$("#message").fadeIn();
+							if(obj.status == 'fail'){
+								for (var i in obj) {
+									if(obj[i] == 'false') {
+										$("#"+i).addClass("err");
+									}
+								}
+							}
+						}//,
+						//function(jq, status, err) {
+							//$("#message").html('<div class="incorrect"><h3>Error!</h3><p>Sorry, we were unable to connect to the server.</p></div>');
+							//$("#message").fadeIn();
+						//}
+					);
+					if(document.getElementById('message').innerHTML.indexOf('Success!') <= 0) {
+						unlockRoverTest();
+					}
+				}
+			}
+
+			function unlockRoverTest() {
+				document.getElementById('moonMap').style.display = "block";
+				document.getElementById('roverTest').style.display = "block";
+			}
+
+			function mapTest(path) {
+				var data = "action=test&path="+path;
+				ajaxCall(
+					data,
+					function(result) {
+						$("#choices").fadeOut();
+						if(result == 'correct') {
+							$("#pathResults").html('');
+							$("#pathResults").fadeOut();	
+						} else {
+							$("#pathResults").html(result);
+							//$("#pathResults").fadeIn();								
+						}
+						roverAnimation(path);
+					}//,
+					//function(jq, status, err) {
+						//$("#pathResults").html('<span class="incorrect"><h3>Sorry, we were unable to connect to the server.</h3></span>');
+						//$("#pathResults").fadeIn();
+					//}
+				);
+			}
+			function roverAnimation(pathchoice) {
+				var rov = $("#theRover");
+				var bar = $('#bar');
+				var lbl = $('#lbl');
+				var percent = 100;
+				TweenLite.to(bar, 0, {ease:"Linear.easeNone", css:{width:percent+"%"}});
+				var state = 'normal';
+
+				playSound1("Moving_v-public_d-304_hifi.mp3", "true");
+
+				soundLoop = setInterval(function(){
+					playSound1("Moving_v-public_d-304_hifi.mp3", "true");
+				}, 2500);
+
+				var timer = setInterval(function(){
+					if(percent > 1) {
+						percent--;
+						lbl.html('oxygen&nbsp;'+percent+'%');
+						TweenLite.to(bar, 1, {ease:"Linear.easeNone", css:{width:percent+"%"}});
+					}
+					switch(state) {
+						case 'normal':
+							rov.toggleClass('r2');
+						break;
+						case 'reverse':
+							rov.toggleClass('r3');
+						break;
+						case 'loaded':
+							rov.toggleClass('r4');
+						break;
+					}
+				}, 290);
+
+				switch(pathchoice) {
+					case 'a':
+						TweenLite.to(rov, 0, {css:{y:"470", x:"650"}, onComplete:function(){
+							TweenLite.to(rov, 1, {css:{rotation:75}, onComplete:function(){
+								TweenLite.to(rov, 5, {css:{y:"-2", x:"560", }, onComplete:function(){
+									playSound2("Camera_R-J_Fairba-8428_hifi.mp3", "false");
+									TweenLite.to(rov, 4, {onComplete:function(){
+										TweenLite.to(rov, 1, {css:{rotation:-45}, onComplete:function(){
+											TweenLite.to(rov, 7, {css:{y:"475", x:"-15"}, onComplete:function(){
+												playSound2("Machine_-public_d-283_hifi.mp3", "false");
+												TweenLite.to(rov, 4, {onComplete:function(){
+												playSound2("RedAlert.mp3", false);
+												document.getElementById('low02').style.visibility = "visible";
+												TweenLite.to(rov, 1, {css:{rotation:0}, onComplete:function(){
+													TweenLite.to(rov, 2, {css:{y:"475", x:"75"}, onComplete:function(){
+														TweenLite.to(rov, 1, {css:{rotation:-90}, onComplete:function(){
+															TweenLite.to(rov, 2, {css:{y:"405", x:"75"}, onComplete:function(){
+																playSound2("Mechanic-Public_D-139_hifi.mp3", "false");
+																TweenLite.to(rov, 2, {onComplete:function(){
+																	rov.removeClass('r2');
+																	playSound2("Aston_Ma-Liquid-8849_hifi.mp3", "false");
+																	rov.addClass('loaded');
+																	state = 'loaded';
+																	TweenLite.to(rov, 1, {css:{rotation:12}, onComplete:function(){
+																		TweenLite.to(rov, 2, {css:{y:"425", x:"250"}, onComplete:function(){
+																			clearInterval(soundLoop);
+																			playSound2("Machine_-public_d-283_hifi.mp3", "false");
+																			clearInterval(timer);
+																			document.getElementById('low02').style.visibility = "hidden";
+																			$("#pathResults").fadeIn();					
+																		}});
+																		}});
+																	}});
+																}});
+															}});
+														}});
+													}});
+												}});
+											}});
+										}});
+									}});
+								}});
+							}});
+						}});
+					break;
+					case 'b':
+						TweenLite.to(rov, 0, {css:{y:"470", x:"650"}, onComplete:function(){
+							TweenLite.to(rov, 7, {css:{y:"475", x:"-15"}, onComplete:function(){
+								playSound2("Machine_-public_d-283_hifi.mp3", "false");
+								TweenLite.to(rov, 4, {onComplete:function(){
+									TweenLite.to(rov, 1, {css:{rotation:-45}, onComplete:function(){
+										TweenLite.to(rov, 2, {css:{y:"405", x:"75"}, onComplete:function(){
+											playSound2("Mechanic-Public_D-139_hifi.mp3", "false");
+											TweenLite.to(rov, 2, {onComplete:function(){
+												rov.removeClass('r2');
+												playSound2("Aston_Ma-Liquid-8849_hifi.mp3", "false");
+												rov.addClass('loaded');
+												state = 'loaded';
+												TweenLite.to(rov, 10, {css:{y:"-2", x:"560"}, onComplete:function(){
+													playSound2("Camera_R-J_Fairba-8428_hifi.mp3", "false");
+													TweenLite.to(rov, 4, {onComplete:function(){
+														playSound2("RedAlert.mp3", false);
+														document.getElementById('low02').style.visibility = "visible";
+														TweenLite.to(rov, 1, {css:{rotation:75}, onComplete:function(){
+															TweenLite.to(rov, 3, {css:{y:"150", x:"590"}, onComplete:function(){
+																clearInterval(soundLoop);
+																playSound2("Machine_-public_d-283_hifi.mp3", "false");
+																clearInterval(timer);
+																document.getElementById('low02').style.visibility = "hidden";
+																$("#pathResults").fadeIn();
+															}});
+														}});
+													}});
+												}});
+											}});
+										}});
+									}});
+								}});
+							}});
+						}});
+					break;
+					case 'c':
+						TweenLite.to(rov, 0, {css:{y:"470", x:"650"}, onComplete:function(){
+							TweenLite.to(rov, 1, {css:{rotation:75}, onComplete:function(){
+								TweenLite.to(rov, 7, {css:{y:"-2", x:"560"}, onComplete:function(){
+									playSound2("Camera_R-J_Fairba-8428_hifi.mp3", "false");
+									TweenLite.to(rov, 4, {onComplete:function(){
+										TweenLite.to(rov, 1, {css:{rotation:-45}, onComplete:function(){
+											TweenLite.to(rov, 7, {css:{y:"405", x:"75"}, onComplete:function(){
+												playSound2("Mechanic-Public_D-139_hifi.mp3", "false");
+												TweenLite.to(rov, 2, {onComplete:function(){
+													rov.removeClass('r2');
+													playSound2("Aston_Ma-Liquid-8849_hifi.mp3", "false");
+													rov.addClass('loaded');
+													state = 'loaded';
+													document.getElementById('low02').style.visibility = "visible";
+													playSound2("RedAlert.mp3", false);
+													TweenLite.to(rov, 3, {css:{y:"475", x:"-15"}, onComplete:function(){
+														playSound2("Machine_-public_d-283_hifi.mp3", "false");
+														TweenLite.to(rov, 4, {onComplete:function(){
+															TweenLite.to(rov, 1, {css:{rotation:0}, onComplete:function(){
+																TweenLite.to(rov, 5, {css:{y:"470", x:"150"}, onComplete:function(){
+																	clearInterval(soundLoop);
+																	playSound2("Machine_-public_d-283_hifi.mp3", "false");
+																	clearInterval(timer);
+																	document.getElementById('low02').style.visibility = "hidden";
+																	$("#pathResults").fadeIn();
+																}});
+															}});
+														}});
+													}});
+												}});
+											}});
+										}});
+									}});
+								}});
+							}});
+						}});
+					break;
+					case 'd':
+						TweenLite.to(rov, 0, {css:{y:"470", x:"650"}, onComplete:function(){
+							TweenLite.to(rov, 1, {css:{rotation:75}, onComplete:function(){
+								TweenLite.to(rov, 5, {css:{y:"-2", x:"560"}, onComplete:function(){
+									playSound2("Camera_R-J_Fairba-8428_hifi.mp3", "false");
+									TweenLite.to(rov, 4, {onComplete:function(){
+										TweenLite.to(rov, 1, {css:{rotation:-45}, onComplete:function(){
+											TweenLite.to(rov, 7, {css:{y:"475", x:"-15"}, onComplete:function(){
+												playSound2("Machine_-public_d-283_hifi.mp3", "false");
+												TweenLite.to(rov, 4, {onComplete:function(){
+													rov.addClass('reverse');
+													rov.removeClass('r2');
+													state = 'reverse';
+													TweenLite.to(rov, 3, {css:{y:"390", x:"80"}, onComplete:function(){
+														playSound2("Mechanic-Public_D-139_hifi.mp3", "false");
+														TweenLite.to(rov, 2, {onComplete:function(){
+															rov.removeClass('reverse');
+															rov.removeClass('r3');
+															playSound2("Aston_Ma-Liquid-8849_hifi.mp3", "false");
+															rov.addClass('loaded');
+															state = 'loaded';
+															TweenLite.to(rov, 1, {css:{rotation:14}, onComplete:function(){
+																playSound2("RedAlert.mp3", false);
+																document.getElementById('low02').style.visibility = "visible";
+																TweenLite.to(rov, 5, {css:{y:"470", x:"650"}, onComplete:function(){
+																	clearInterval(soundLoop);
+																	clearInterval(timer);
+																	$("#pathResults").html('<br class"clear"/><h3>Congratulations, Astronaut Candidate '+document.getElementById("name").value+'!</h3><p>You have earned the Lunar Rover Geometry Badge. You are ready to advance to the next stage of our interview process. Please choose your next challenge.</p><ul><li><a href="http://www.nasa.gov/audience/foreducators/exploringmath/geometry/Prob_OhChute_detail.html">Oh, Chute! in the Exploring Space Through Math Geometry Series</a></li><li><a href="http://www.nasa.gov/audience/foreducators/exploringmath/precalculus/Prob_CommLunar_detail.html">Communications and the Lunar Outpost in the Exploring Space Through Math Precalculus Series</a></li><li><a href="http://www.nasa.gov/audience/foreducators/exploringmath/geometry/Prob_NextGen_detail.html">Next Generation Spacecraft in the Exploring Space Through Math Geometry Series</a></li>');
+																	document.getElementById('low02').style.visibility = "hidden";
+																	$("#pathResults").fadeIn();
+																	setTimeout('openForm()', 2500);
+																	playSound2("Chipmunks_sound.mp3", false);
+																}});
+															}});
+														}});
+													}});
+												}});
+											}});
+										}});
+									}});
+								}});
+							}});
+						}});
+					break;
+				}
+			}
+
+			function IsNumeric(num) {
+     			return (num >=0 || num < 0);
+			}
+
+			function ajaxCall(ajaxData, successClosure, errorClosure) {
+				$.ajax({
+					type: "POST",
+					url: "test.php",
+					data: ajaxData,
+					cache: false,
+					success: successClosure,
+					error: errorClosure
+				});				
+			}
+		/* ]]> */
+	</script>
+</body>
+</html>

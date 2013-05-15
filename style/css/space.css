@@ -1,0 +1,229 @@
+*, html {
+	margin: 0px;
+	padding: 0px;
+}
+body {
+	background: #fff;
+	font: normal 13pt arial, helvetica, sans-serif;
+}
+a, a:visited {
+	color: #0066cc;
+	text-decoration: none;
+}
+a:hover {
+	border-bottom: 1px solid #fff;
+}
+#header {
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+	width: 800px;
+	height: 151px;
+	background: url('../img/header.png') no-repeat 0px 0px;
+}
+#main, #footer, #trials, #dataTable, #map {
+	display: block;
+	margin: 0px auto;
+	padding: 5px;
+	width: 800px;
+	background: #ededed;
+	border: 1px solid #ccc;
+}
+.noTop {
+	border-top: 0px !important;
+}
+.noBottom {
+	border-bottom: 0px !important;
+}
+#main h1 {
+	margin-bottom: 4px;
+}
+#main h3, #map h3 {
+	border-bottom: 3px solid #777;	
+	margin-top: 4px;
+	margin-bottom: 4px;
+}
+#main p {
+	padding: 5px;
+	margin-top: 5px;
+}
+#main ol, #main ul {
+	list-style-position: inside;
+	margin-left: 20px;
+}
+#dataTable .row {
+	text-align: center;
+	background: #fff;
+	display: block;
+	border: 1px solid #777;
+	clear: both;
+}
+#dataTable .titles {
+	background: #939598;
+	display: block;
+	clear: both;
+	height: 41px;
+}
+#dataTable .titles .col {
+	text-align: center;
+	font-weight: bold;
+	color: #fff;
+}
+#dataTable .col, #dataTable .err {
+	color: #000;
+	display: block;
+	width: 195px;
+	border-left: 1px solid #777;
+	float: left;
+}
+#dataTable .col input {
+	border: 0px;
+	background: #fff;
+	color: #000;
+	text-align: center;
+	font-size: 17px;
+}
+#dataTable .err {
+	/*border: 1px solid #660000;*/
+	background: #660000;
+	color: #ff0000;
+}
+#dataTable .err input {
+	/*border: 1px solid #fff;*/
+	border: 0px;
+	background: #660000;
+	color: #ff0000;
+	text-align: center;
+	font-size: 17px;
+}
+#message, #ratesResults, #pathResults {
+	display: none;
+}
+#message h3 {
+	border-bottom: 3px solid #777;	
+	width: 300px;
+}
+#message .incorrect h3 {
+	color: #000;
+	border-bottom: 3px solid #660000;
+	width: 300px;
+}
+#ratesResults h3 {
+	color: #000 !important;
+	border: none !important;
+	float: left !important;
+}
+#ratesResults .incorrect h3 {
+	color: #660000 !important;
+	border: none !important;
+	float: left !important;
+}
+#pathResults .incorrect h3 {
+	color: #660000 !important;
+}
+#pathResults ul {
+	list-style-position: inside;
+	margin-left: 5px;
+}
+#map #moonMap {
+	background: #000 url('../img/moonMap.png') no-repeat 0px 0px;
+	width: 740px;
+	height: 560px;
+	margin: 10px 0px 10px 25px;
+}
+#map #meter {
+	height: 50px;
+	background: #ccc;
+	width: 740px;
+	margin: 4px 0px 4px 25px;
+}
+#map #meter #bar {
+	width: 740px;
+	height: 80px;
+	background: url('../img/oxygenMeter.png') no-repeat 0px 0px;
+}
+#map #meter #lbl {
+	color: #fff;
+	font-size: 40px;
+	margin-left: 10px;
+}
+#theRover {
+	width: 125px;
+	height: 70px;
+	background: url('../img/roversheet.png') no-repeat 0px 0px;
+}
+.reverse {
+	background-position: -250px 0px !important;
+}
+.loaded {
+	background-position: -500px 0px !important;
+}
+#footer {
+	font-size: 7pt;
+}
+#demo {
+	background: #000 url('../img/trialbg.png') no-repeat 0px 0px;	
+}
+#rover1, #rover2 {
+	width: 125px;
+	height: 70px;
+	background: url('../img/rover.png') no-repeat 0px 0px;
+	margin: 15px 0px;
+}
+#rover2 {
+	background: url('../img/rover2.png') no-repeat 0px 0px;	
+}
+.r2 {
+	background-position: -125px 0px !important;
+}
+.r3 {
+	background-position: -375px 0px !important;
+}
+.r4 {
+	background-position: -625px 0px !important;
+}
+#results {
+	display: none;
+	margin-left: 10px;
+}
+#results h3 {
+	border-bottom: 3px solid #777;
+	width: 680px;
+	margin-bottom: 2px;
+}
+#results .rates {
+	background: #fff;
+	color: #000;
+	border: 1px solid #777;
+	width: 40px;
+}
+.clear {
+	clear: both;
+}
+.emphasis {
+	font-style: italic !important;
+	font-weight: bold !important;
+}
+.center {
+	text-align: center;
+}
+.floatRight {
+	float: right;
+}
+.resultsBox {
+	width: 200px;
+	float: left;
+}
+.btn {
+	background: #ccc;
+	border: 1px solid #333;
+	font-size: 14pt;
+}
+.testBtn {
+	background: #ccc;
+	border: 1px solid #333;
+	font-size: 14pt;
+	float: left;
+	margin-right: 50px;	
+	margin-top: 10px;
+}
