@@ -1,8 +1,10 @@
 <?php
 /**
  * @author andrew harrison <andrew@cet.edu>
- * @copyright (c) 2012 the Center for Educational Technologies
- * @version 3.02
+ * @co-author chris ruckman <ruckman@cet.edu>
+ * @copyright (c) 2012-2013 the Center for Educational Technologies
+ * Licensed uder the GNU GPL license
+ * @version 4.00
  */
 $action = $_POST['action'];
 /**
